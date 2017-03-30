@@ -1,19 +1,23 @@
-if (window.DeviceOrientationEvent) {
-    window.addEventListener("deviceorientation", function () {
-        tilt([event.beta, event.gamma]);
-    }, true);
-} else if (window.DeviceMotionEvent) {
-    window.addEventListener('devicemotion', function () {
-        tilt([event.acceleration.x * 2, event.acceleration.y * 2]);
-    }, true);
-} else {
-    window.addEventListener("MozOrientation", function () {
-        tilt([orientation.x * 50, orientation.y * 50]);
-    }, true);
-}
 
-function tilt (values) {
-    var tilt = document.getElementById('tilt');
-    tilt.innerHTML = values[1];
+
+function tilt (tilt) {
+    var display= document.getElementById('tilt');
+    display.innerHTML = JSON.stringify(tilt);
     
 }
+
+
+if (window.DeviceOrientationEvent) {
+		window.addEventListener("deviceorientation", function(event) 
+		{
+            var tilt = {
+                x:Math.round(event.gamma),
+                y:Math.round(event.beta),
+                rot:Math.round(event.alpha),
+            }
+
+			tilt(tilt)
+		}, true);
+	} else {
+	alert("Sorry, your browser doesn't support Device Orientation");
+	}
