@@ -15,4 +15,5 @@ if (window.DeviceOrientationEvent) {
 function tilt (values) {
     var tilt = document.getElementById('tilt');
     tilt.innerHTML = JSON.stringify(values);
+    
 }
